@@ -1,0 +1,19 @@
+version: '1.0.0'
+
+services:
+  backend:
+    build: .
+    container_name: backend
+
+    ports:
+      - 8000:8000
+    
+    command: python manage.py runserver 0.0.0.0:8000
+
+    volumes:
+      - ./core:/app
+    
+    environment:
+      - DEBUG=True
+      - SECRET_KEY=test
+    
