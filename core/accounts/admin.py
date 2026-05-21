@@ -1,8 +1,13 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User, OtpCode, Profile
+from .models import User, OtpCode, Profile, AddressUser
 
 # Register your models here.
+
+class AddressUserAdminInline(admin.StackedInline):
+    model = AddressUser
+    extra = 1
+    verbose_name_plural = 'addresses'
 
 class ProfileUserAdminInline(admin.StackedInline):
     model = Profile
@@ -19,7 +24,7 @@ class CustomUserAdmin(UserAdmin):
         "updated_date",
     )
 
-    inlines = [ProfileUserAdminInline]
+    inlines = [ProfileUserAdminInline, AddressUserAdminInline]
 
     fieldsets = (
         (

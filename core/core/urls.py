@@ -41,6 +41,8 @@ urlpatterns = [
 
     path('accounts/', include('accounts.urls')),
     path('shop/', include('shop.urls')),
+    path('payment/', include('payment.urls')),
+    path('tickets/', include('tickets.urls')),
 
     path(
         "redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="redoc"
@@ -53,3 +55,7 @@ urlpatterns = [
 
     path('tinymce/', include('tinymce.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root= settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)

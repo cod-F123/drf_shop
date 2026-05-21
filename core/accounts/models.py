@@ -99,3 +99,13 @@ class OtpCode(models.Model):
             self.expired_at = timezone.now() + timedelta(minutes=2)
     
         super().save(*args, **kwargs)
+
+class AddressUser(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='addresses')
+
+    title = models.CharField(max_length=155)
+    address = models.TextField()
+    zip_code = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.user.phone

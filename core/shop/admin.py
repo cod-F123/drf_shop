@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product, ImageProduct, CharacteristicProduct, Comment
+from .models import Category, Product, ImageProduct, CharacteristicProduct, Comment, SpecialSuggestion, SpecialSuggestionProduct
 
 # Register your models here.
 
@@ -37,3 +37,12 @@ class ProductAdmin(admin.ModelAdmin):
 
     list_filter = ['category__name']
     inlines = [ImageProductInlineAdmin, CharacteristicProductInlineAdmin, CommentAdminInline]
+
+class ProductSeggestionInlineAdmin(admin.TabularInline):
+    model = SpecialSuggestionProduct
+    extra = 1
+
+@admin.register(SpecialSuggestion)
+class SpecialSuggestionAdmin(admin.ModelAdmin):
+    list_display = ["start_at", "end_at", "is_active", "remaining"]
+    inlines = [ProductSeggestionInlineAdmin,]

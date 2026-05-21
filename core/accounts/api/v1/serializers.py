@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from accounts.models import User, OtpCode, Profile
+from accounts.models import User, OtpCode, Profile, AddressUser
 
 
 class SendVerifyCodeSerializer(serializers.ModelSerializer):
@@ -61,6 +61,7 @@ class VerifyCodeSerializer(serializers.Serializer):
         fields = ['otp_code', 'phone']
         writeonly_fields = ['otp_code', 'phone']
 
+
 class UserInfoSerailzier(serializers.ModelSerializer):
     full_name = serializers.CharField(required = False)
 
@@ -87,4 +88,18 @@ class UserInfoSerailzier(serializers.ModelSerializer):
 
     class Meta:
         model = User 
-        fields = ['email', 'full_name']
+        fields = ['id','email', 'full_name']
+        read_only_fields = ['id']
+
+
+class AddressUserSerializer(serializers.ModelSerializer):
+
+    def create(self, validated_data):
+        validated_data['user'] = self.context["request"].user 
+        
+        return super().create(validated_data)
+
+    class Meta:
+        model = AddressUser
+        fields = ['id', 'title', 'address', 'zip_code']
+        read_only_fields = ['id']

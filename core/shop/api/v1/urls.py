@@ -8,5 +8,10 @@ router = DefaultRouter()
 
 router.register('product', views.ProductViewSet, basename='product')
 
-urlpatterns = router.urls
+urlpatterns = [
+    path('special-suggestion/', views.SpecialSuggestionApiView.as_view(), name="special-suggestion"),
+    path('comment/create/', views.CreateCommentApiView.as_view(), name="create-comment"),
+]
+
+urlpatterns += router.urls
 
