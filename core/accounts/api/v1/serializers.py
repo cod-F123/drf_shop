@@ -8,7 +8,12 @@ class SendVerifyCodeSerializer(serializers.ModelSerializer):
 
     def validate(self, attrs):
 
-        user , created = User.objects.get_or_create(phone = attrs.get('phone'))
+        phone = attrs.get("phone")
+
+        if not phone.isdigit() or len(phone) < 11 or not phone.startswith(("98","09")):
+            raise serializers.ValidationError({"phone" : "Invalid phone format"})
+
+        user , created = User.objects.get_or_create(phone = phone)
 
         if not created:
             last_otp = OtpCode.objects.filter(user = user).order_by('-created_at').first()
