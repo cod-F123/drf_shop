@@ -12,7 +12,7 @@ User = get_user_model()
 # Create your models here.
 
 class Category(models.Model):
-    name = models.CharField(max_length=255, unique=True)    
+    name = models.CharField(max_length=191, unique=True)    
 
     image  = models.ImageField(upload_to='category/imgs', blank=True,null=True)
 
@@ -43,7 +43,7 @@ class Product(models.Model):
 
     tag = models.CharField(max_length=11, choices=TAGS, blank=True, null=True)
 
-    slug = models.CharField(max_length=255, blank=True, null=True, unique=True)
+    slug = models.CharField(max_length=191, blank=True, null=True, unique=True)
 
     @property
     def is_exist(self):

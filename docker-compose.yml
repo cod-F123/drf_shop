@@ -17,3 +17,25 @@ services:
       - DEBUG=True
       - SECRET_KEY=test
     
+    depends_on:
+      - database
+  
+  database:
+    image : mysql:8 
+    container_name : database
+    restart : always
+
+    environment :
+      - MYSQL_ROOT_PASSWORD=test_password
+      - MYSQL_DATABASE=drf_shop_db
+    
+    ports:
+      - "33061:3306"
+    
+    volumes:
+      - dbdata:/var/lib/mysql
+
+volumes:
+  dbdata:
+
+    

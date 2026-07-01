@@ -32,7 +32,7 @@ class Ticket(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    ticket_id = models.CharField(max_length=255, blank=True, null=True, unique= True)
+    ticket_id = models.CharField(max_length=191, blank=True, null=True, unique= True)
 
     priority = models.CharField(max_length=6, choices=PRIORITY, default="Medium")
     status = models.CharField(max_length=5, choices=STATUS, default="Open")

@@ -41,7 +41,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     """ This class defines the user model """
 
     phone = models.CharField(_("phone_number"),max_length=13, unique=True)
-    email = models.EmailField(_("email"), max_length=255, unique=True, blank=True, null=True)
+    email = models.EmailField(_("email"), max_length=191, unique=True, blank=True, null=True)
 
     is_active = models.BooleanField(verbose_name=_("is active"), default=True)
     is_staff = models.BooleanField(verbose_name=_("is staff"), default=False)
