@@ -13,29 +13,29 @@ services:
     volumes:
       - ./core:/app
     
-    environment:
-      - DEBUG=True
-      - SECRET_KEY=test
+    env_file:
+      - path : .env
+        required : true
     
-    depends_on:
-      - database
+    # depends_on:
+    #   - database
   
-  database:
-    image : mysql:8 
-    container_name : database
-    restart : always
+#   database:
+#     image : mysql:8 
+#     container_name : database
+#     restart : always
 
-    environment :
-      - MYSQL_ROOT_PASSWORD=test_password
-      - MYSQL_DATABASE=drf_shop_db
+#     environment :
+#       - MYSQL_ROOT_PASSWORD=test_password
+#       - MYSQL_DATABASE=drf_shop_db
     
-    ports:
-      - "33061:3306"
+#     ports:
+#       - "33061:3306"
     
-    volumes:
-      - dbdata:/var/lib/mysql
+#     volumes:
+#       - dbdata:/var/lib/mysql
 
-volumes:
-  dbdata:
+# volumes:
+#   dbdata:
 
     

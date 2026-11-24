@@ -14,7 +14,7 @@ class OrderViewSet(ModelViewSet):
 
     
     def get_queryset(self):
-        return Order.objects.filter(user = self.request.user)
+        return Order.objects.prefetch_related("items__product").select_related("user").filter(user = self.request.user)
 
 
     

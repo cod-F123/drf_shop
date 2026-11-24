@@ -16,13 +16,13 @@ class TicketViewSet( mixins.RetrieveModelMixin, mixins.ListModelMixin, mixins.Cr
     
 
     def get_queryset(self):
-        return Ticket.objects.filter(creator__id = self.request.user.id)
+        return Ticket.objects.prefetch_related("replies").select_related("creator").filter(creator__id = self.request.user.id)
 
 class CreateReplyTicket(generics.CreateAPIView):
     serializer_class = TicketReplySerializer
     permission_classes = [IsAuthenticated,]
 
     def get_queryset(self):
-        return TicketReply.objects.filter(ticket__creator = self.request.user)
+        return TicketReply.objects.select_related("ticket").select_related("sender").filter(ticket__creator = self.request.user)
 
     

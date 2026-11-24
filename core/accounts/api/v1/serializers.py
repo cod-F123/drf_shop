@@ -73,7 +73,7 @@ class UserInfoSerailzier(serializers.ModelSerializer):
     def update(self, instance, validated_data):
 
         if validated_data.get('full_name', None):
-            user_profile = Profile.objects.get(user = self.context["request"].user)
+            user_profile = Profile.objects.select_related("user").get(user = self.context["request"].user)
 
             user_profile.full_name = validated_data.get('full_name',None)
             user_profile.save()

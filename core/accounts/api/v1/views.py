@@ -44,7 +44,7 @@ class UserAddressViewSet(ModelViewSet):
     serializer_class = AddressUserSerializer
 
     def get_queryset(self):
-        return AddressUser.objects.filter(user = self.request.user)
+        return AddressUser.objects.select_related("user").filter(user = self.request.user)
     
 
 
