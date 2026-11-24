@@ -228,7 +228,7 @@ if not DEBUG:
     CSRF_COOKIE_SECURE = True
 
     STATIC_ROOT = BASE_DIR / 'staticfiles'
-    STATICFILES_DIRS = None
+    STATICFILES_DIRS = []
     # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
